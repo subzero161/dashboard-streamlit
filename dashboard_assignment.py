@@ -34,44 +34,44 @@ with dataset:
     cdc = pd.DataFrame(hhs_data['Staff Involved'], hhs_data['Centers for Disease Control and Prevention'].head())
     st.bar_chart(cdc)
 
-with model_training:
-    st.header('Model is trained here')
-    st.text('Chose the parameters that you wannna run')
+# with model_training:
+#     st.header('Model is trained here')
+#     st.text('Chose the parameters that you wannna run')
 
-    sel_col, disp_col = st.columns(2)
+#     sel_col, disp_col = st.columns(2)
 
-    max_depth = sel_col.slider('what should be the max depth of the model', min_value=10, max_value=100, value=20, step=10)
+#     max_depth = sel_col.slider('what should be the max depth of the model', min_value=10, max_value=100, value=20, step=10)
 
-    n_estimators = sel_col.selectbox('How many trees should there be', options=[100,200,300,'No limit'], index = 0)
+#     n_estimators = sel_col.selectbox('How many trees should there be', options=[100,200,300,'No limit'], index = 0)
 
-    sel_col.text('Here is a list of features in my data')
-    sel_col.write(hhs_data.columns)
+#     sel_col.text('Here is a list of features in my data')
+#     sel_col.write(hhs_data.columns)
 
-    input_feature = sel_col.text_input('Which feature should be used as import feature', 'Centers for Disease Control and Prevention')
+#     input_feature = sel_col.text_input('Which feature should be used as import feature', 'Centers for Disease Control and Prevention')
    
-    if n_estimators == 'No limit':
-        regr = RandomForestRegressor(max_depth=max_depth)
-    else:
-        regr = RandomForestRegressor(max_depth=max_depth, n_estimators=n_estimators)
+#     if n_estimators == 'No limit':
+#         regr = RandomForestRegressor(max_depth=max_depth)
+#     else:
+#         regr = RandomForestRegressor(max_depth=max_depth, n_estimators=n_estimators)
 
-    #regr = RandomForestRegressor(max_depth=max_depth, n_estimators=number_of_trees)
-    X = hhs_data[[input_feature]]
-    y = hhs_data[['Centers for Disease Control and Prevention']] 
+#     #regr = RandomForestRegressor(max_depth=max_depth, n_estimators=number_of_trees)
+#     X = hhs_data[[input_feature]]
+#     y = hhs_data[['Centers for Disease Control and Prevention']] 
     
-    regr.fit(X, y)
-    prediction = regr.predict(y)
+#     regr.fit(X, y)
+#     prediction = regr.predict(y)
 
-    display_col.subheader('Mean absolute error:')
-    display_col.write(mean_absolute_error(y, prediction))
+#     display_col.subheader('Mean absolute error:')
+#     display_col.write(mean_absolute_error(y, prediction))
 
-    display_col.subheader('Mean absolute error:')
-    display_col.write(mean_absolute_error(y, prediction)) 
+#     display_col.subheader('Mean absolute error:')
+#     display_col.write(mean_absolute_error(y, prediction)) 
     
-    display_col.subheader('Mean square error:')
-    display_col.write(mean_square_error(y, prediction)) 
+#     display_col.subheader('Mean square error:')
+#     display_col.write(mean_square_error(y, prediction)) 
     
-    display_col.subheader('R squared error error:')
-    display_col.write(r2_score(y, prediction)) 
+#     display_col.subheader('R squared error error:')
+#     display_col.write(r2_score(y, prediction)) 
 
 #def load_data():
     #data = pd.read_csv(DATA_URL)
